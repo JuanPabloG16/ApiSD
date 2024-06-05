@@ -10,7 +10,7 @@ app.use(express.json()); // para poder parsear JSON
 async function handleRole2(user) {
   if (user.rol === 2) {
     try {
-      const response = await axios.get('https://611a-2800-e2-ba80-8ff-d55a-b4c8-7d7f-ba4.ngrok-free.app/getRandomId');
+      const response = await axios.get('https://7458-2800-e2-ba80-8ff-f5de-971e-28a9-4ef1.ngrok-free.app/api/turismo/getRandomTurismoId');
       console.log('Respuesta del servicio getRandomId:', response.data);
       return response.data;
     } catch (error) {
@@ -36,6 +36,22 @@ app.post('/login', async (req, res) => {
     // Si la respuesta del servidor es exitosa, envía la respuesta al cliente
     if (response.data) {
       const randomIdResponse = await handleRole2(response.data);
+      if (randomIdResponse) {
+        const datoID = randomIdResponse.id; // Guarda el id en la variable datoID
+        // Enviar el datoID a la API crearResena
+        try {
+          const resenaResponse = await axios.post('https://d51f-45-65-234-17.ngrok-free.app/crearResena', {
+            valor: 0,
+            comentario: '',
+            usuarioID: response.data.id,
+            datoID: datoID,
+            estadoID: 1
+          });
+          console.log('Respuesta del servicio crearResena:', resenaResponse.data);
+        } catch (error) {
+          console.error('Error al enviar la solicitud al servicio crearResena:', error);
+        }
+      }
       res.json({
         success: true,
         message: 'Inicio de sesión exitoso',
@@ -62,6 +78,7 @@ const port = process.env.PORT || 3000;
 app.listen(port, '0.0.0.0', () => {
   console.log(`Servidor corriendo en http://0.0.0.0:${port}`);
 });
+
 
 
 
