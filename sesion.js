@@ -73,7 +73,7 @@ app.put('/updateResena', async (req, res) => {
   console.log('Datos recibidos para actualizar la reseña:', req.body);
 
   try {
-    const updateResponse = await axios.put(`http://localhost:8081/actualizarResena/${id}`, {
+    const updateResponse = await axios.put(`https://39a4-45-65-234-17.ngrok-free.app/actualizarResena/${id}`, {
       valor,
       comentario,
       usuarioID,
