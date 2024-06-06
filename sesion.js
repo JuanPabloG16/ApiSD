@@ -67,11 +67,41 @@ app.post('/login', async (req, res) => {
   }
 });
 
+// Nueva ruta para actualizar una reseña
+app.put('/updateResena', async (req, res) => {
+  const { id, valor, comentario, usuarioID, datoID, estadoID } = req.body;
+  console.log('Datos recibidos para actualizar la reseña:', req.body);
+
+  try {
+    const updateResponse = await axios.put(`http://localhost:8081/actualizarResena/${id}`, {
+      valor,
+      comentario,
+      usuarioID,
+      datoID,
+      estadoID
+    });
+    console.log('Respuesta del servicio updateResena:', updateResponse.data);
+
+    res.json({
+      success: true,
+      message: 'Reseña actualizada exitosamente',
+      data: updateResponse.data
+    });
+  } catch (error) {
+    console.error('Error al enviar la solicitud para actualizar la reseña:', error);
+    res.json({
+      success: false,
+      message: 'Error al actualizar la reseña'
+    });
+  }
+});
+
 const port = process.env.PORT || 3000;
 
 app.listen(port, '0.0.0.0', () => {
   console.log(`Servidor corriendo en http://0.0.0.0:${port}`);
 });
+
 
 
 
