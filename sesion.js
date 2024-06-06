@@ -10,7 +10,7 @@ async function handleRole2(user) {
   if (user.rol !== 2) return null;
 
   try {
-    const { data: datoID } = await axios.get('https://c059-2800-e2-ba80-8ff-149e-ce2-f63f-b9f1.ngrok-free.app/api/turismo/getRandomTurismoId');
+    const { data: datoID } = await axios.get('https://datos-turismo-latest.onrender.com/api/turismo/getRandomTurismoId');
     console.log('Respuesta completa del servicio getRandomId:', datoID);
 
     if (datoID !== null) {
@@ -73,7 +73,7 @@ app.put('/updateResena', async (req, res) => {
   console.log('Datos recibidos para actualizar la reseña:', req.body);
 
   try {
-    const updateResponse = await axios.put(`https://39a4-45-65-234-17.ngrok-free.app/actualizarResena/${id}`, {
+    const updateResponse = await axios.put(`https://mongo-sesion-latest.onrender.com/actualizarResena/${id}`, {
       valor,
       comentario,
       usuarioID,
